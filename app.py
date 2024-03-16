@@ -39,15 +39,14 @@ def imageInput(device, src):
             counter_NoHelm = 0
 
             # Count detections for each type of object
-            for obj in pred.names[0]:
-                if obj == 'helmet':
-                    counter_Helm += 1
-                elif obj == 'head':
-                    counter_NoHelm += 1
+            if len(pred.xyxy) > 0:
+                counter1 += len(pred.xyxy[0])
+
+            # Increment counter2 based on the number of detection results
+            counter2 += len(pred.xyxy) - 1 if len(pred.xyxy) > 1 else 0
 
             # Increment global counters with the counts from this image
-            counter1 += counter_Helm
-            counter2 += counter_NoHelm
+            
             for im in pred.ims:
                 im_base64 = Image.fromarray(im)
                 im_base64.save(outputpath)
