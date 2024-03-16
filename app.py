@@ -56,28 +56,28 @@ def imageInput(device, src):
 
 
 
-def videoInput(device, src):
-    uploaded_video = st.file_uploader("Upload Video", type=['mp4', 'mpeg', 'mov'])
-    if uploaded_video != None:
+# def videoInput(device, src):
+#     uploaded_video = st.file_uploader("Upload Video", type=['mp4', 'mpeg', 'mov'])
+#     if uploaded_video != None:
 
-        ts = datetime.timestamp(datetime.now())
-        pp = ts
-        imgpath = os.path.join('data/uploads', str(ts)+uploaded_video.name)
-        outputpath = os.path.join('data/video_output', os.path.basename(imgpath))
+#         ts = datetime.timestamp(datetime.now())
+#         pp = ts
+#         imgpath = os.path.join('data/uploads', str(ts)+uploaded_video.name)
+#         outputpath = os.path.join('data/video_output', os.path.basename(imgpath))
 
-        with open(imgpath, mode='wb') as f:
-            f.write(uploaded_video.read())  # save video to disk
+#         with open(imgpath, mode='wb') as f:
+#             f.write(uploaded_video.read())  # save video to disk
 
-        st_video = open(imgpath, 'rb')
-        video_bytes = st_video.read()
-        st.video(video_bytes)
-        st.write("วีดีโอที่ถูกนำเข้ามา")
-        detect(weights="models/best.pt", source=imgpath, device=0,project=outputpath) if device == 'cuda' else detect(weights="models/best.pt", source=imgpath, device='cpu')
-        st_video2 = open(outputpath+"/exp/"+ str(pp)+uploaded_video.name, 'rb')
-        video_bytes2 = st_video2.read()
-        # st.video(video_bytes2)
-        st.download_button(label="Download video file", data=video_bytes2,file_name='video_clip.mp4')
-        st.write("ผลลัพท์การตรวจสอบ")
+#         st_video = open(imgpath, 'rb')
+#         video_bytes = st_video.read()
+#         st.video(video_bytes)
+#         st.write("วีดีโอที่ถูกนำเข้ามา")
+#         detect(weights="models/best.pt", source=imgpath, device=0,project=outputpath) if device == 'cuda' else detect(weights="models/best.pt", source=imgpath, device='cpu')
+#         st_video2 = open(outputpath+"/exp/"+ str(pp)+uploaded_video.name, 'rb')
+#         video_bytes2 = st_video2.read()
+#         # st.video(video_bytes2)
+#         st.download_button(label="Download video file", data=video_bytes2,file_name='video_clip.mp4')
+#         st.write("ผลลัพท์การตรวจสอบ")
         
 
 
@@ -122,53 +122,53 @@ def main():
             st.write("ผลลัพท์การตรวจสอบ")
 
 
-    elif option == "Video": 
-        videoInput(deviceoption, datasrc)
-        # values = st.slider('Show test Video', 0, 3, 0)
+    # elif option == "Video": 
+    #     videoInput(deviceoption, datasrc)
+    #     # values = st.slider('Show test Video', 0, 3, 0)
 
-        # if(values == 0):
-        #     st_video_test1 = open("data/outputs/test.mp4", 'rb')
-        #     st.video(st_video_test1)
-        #     video_bytes_test1 = st_video_test1.read()
-        #     # st.video(video_bytes2)
-        #     st.write("ผลลัพท์การตรวจสอบ")
-        # elif(values == 1):
-        #     st_video_test2 = open("data/outputs/test2.mp4", 'rb')
-        #     st.video(st_video_test2)
-        #     video_bytes_test2 = st_video_test2.read()
-        #     # st.video(video_bytes2)
-        #     st.write("ผลลัพท์การตรวจสอบ")
-        # elif(values == 2):
-        #     st_video_test3 = open("data/outputs/test3.mp4", 'rb')
-        #     st.video(st_video_test3)
-        #     video_bytes_test2 = st_video_test3.read()
-        #     # st.video(video_bytes2)
-        #     st.write("ผลลัพท์การตรวจสอบ")
-        # elif(values == 3):
-        #     st_video_test4 = open("data/outputs/test4.mp4", 'rb')
-        #     st.video(st_video_test4)
-        #     video_bytes_test4 = st_video_test4.read()
-        #     # st.video(video_bytes2)
-        #     st.write("ผลลัพท์การตรวจสอบ")
-        values = st.selectbox('Example',('Case 1', 'Case 2', 'Case 3'))
-        if (values == "Case 1"):
-            st_video_test1 = open("data/outputs/test.mp4", 'rb')
-            st.video(st_video_test1)
+    #     # if(values == 0):
+    #     #     st_video_test1 = open("data/outputs/test.mp4", 'rb')
+    #     #     st.video(st_video_test1)
+    #     #     video_bytes_test1 = st_video_test1.read()
+    #     #     # st.video(video_bytes2)
+    #     #     st.write("ผลลัพท์การตรวจสอบ")
+    #     # elif(values == 1):
+    #     #     st_video_test2 = open("data/outputs/test2.mp4", 'rb')
+    #     #     st.video(st_video_test2)
+    #     #     video_bytes_test2 = st_video_test2.read()
+    #     #     # st.video(video_bytes2)
+    #     #     st.write("ผลลัพท์การตรวจสอบ")
+    #     # elif(values == 2):
+    #     #     st_video_test3 = open("data/outputs/test3.mp4", 'rb')
+    #     #     st.video(st_video_test3)
+    #     #     video_bytes_test2 = st_video_test3.read()
+    #     #     # st.video(video_bytes2)
+    #     #     st.write("ผลลัพท์การตรวจสอบ")
+    #     # elif(values == 3):
+    #     #     st_video_test4 = open("data/outputs/test4.mp4", 'rb')
+    #     #     st.video(st_video_test4)
+    #     #     video_bytes_test4 = st_video_test4.read()
+    #     #     # st.video(video_bytes2)
+    #     #     st.write("ผลลัพท์การตรวจสอบ")
+    #     values = st.selectbox('Example',('Case 1', 'Case 2', 'Case 3'))
+    #     if (values == "Case 1"):
+    #         st_video_test1 = open("data/outputs/test.mp4", 'rb')
+    #         st.video(st_video_test1)
      
-            #st.video(video_bytes2)
-            st.write("ผลลัพท์การตรวจสอบ")
-        elif (values == "Case 2"):
-            st_video_test2 = open("data/outputs/test1.mp4", 'rb')
-            st.video(st_video_test2)
+    #         #st.video(video_bytes2)
+    #         st.write("ผลลัพท์การตรวจสอบ")
+    #     elif (values == "Case 2"):
+    #         st_video_test2 = open("data/outputs/test1.mp4", 'rb')
+    #         st.video(st_video_test2)
        
-            #st.video(video_bytes2)
-            st.write("ผลลัพท์การตรวจสอบ")
-        elif (values == "Case 3"):
-            st_video_test3 = open("data/outputs/test4.mp4", 'rb')
-            st.video(st_video_test3)
+    #         #st.video(video_bytes2)
+    #         st.write("ผลลัพท์การตรวจสอบ")
+    #     elif (values == "Case 3"):
+    #         st_video_test3 = open("data/outputs/test4.mp4", 'rb')
+    #         st.video(st_video_test3)
    
-            #st.video(video_bytes2)
-            st.write("ผลลัพท์การตรวจสอบ")
+    #         #st.video(video_bytes2)
+    #         st.write("ผลลัพท์การตรวจสอบ")
 
 
     st.sidebar.text(f"Helmet Detect:{counter1}")
