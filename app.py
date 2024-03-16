@@ -8,13 +8,14 @@ from datetime import datetime
 import os
 import wget
 import time
+counter = 0
 
 model = torch.hub.load('ultralytics/yolov5', 'custom', path='models/best.pt', force_reload=True) 
 image1 = Image.open('data/outputs/test1.jpg')
 image2 = Image.open('data/outputs/test2.jpg')
 image3 = Image.open('data/outputs/test3.jpg')
 def imageInput(device, src):
-    
+    global counter
     if src == 'อัปโหลดรูปภาพ':
         image_file = st.file_uploader("ตรวจสอบรูปภาพ", type=['png', 'jpeg', 'jpg'])
         col1, col2 = st.columns(2)
@@ -33,6 +34,8 @@ def imageInput(device, src):
             model.cuda() if device == 'cuda' else model.cpu()
             pred = model(imgpath)
             pred.render()  # render bbox in image
+            num_object = len(pred.xyxy[0])
+            counter += num_objects
             for im in pred.ims:
                 im_base64 = Image.fromarray(im)
                 im_base64.save(outputpath)
@@ -163,7 +166,7 @@ def main():
             st.write("ผลลัพท์การตรวจสอบ")
 
 
-    
+    st.sidebat.text(f"Total number of object detected:{counter}")
 
     
     
