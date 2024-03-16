@@ -177,9 +177,8 @@ def main():
     #         st.write("ผลลัพท์การตรวจสอบ")
 
 
-    st.sidebar.text(f"Helmet Detect:{counter1}")
-    st.sidebar.text(f"Helmet Not Detect:{counter2}")
-    
+    st.sidebar.text(f"Object Detect Count:{counter1}")
+        
     
 
 if __name__ == '__main__':
