@@ -38,9 +38,7 @@ def imageInput(device, src):
             if len(pred.xyxy) > 0:
                 num_objects1 = len(pred.xyxy[0])  # Count of first type of result
                 counter1 += num_objects1
-            if len(pred.xyxy) > 1:
-                num_objects2 = len(pred.xyxy[1])  # Count of second type of result
-                counter2 += num_objects2
+            counter2 += len(pred.xyxy) - 1 if len(pred.xyxy) > 1 else 0
             for im in pred.ims:
                 im_base64 = Image.fromarray(im)
                 im_base64.save(outputpath)
