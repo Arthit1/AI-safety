@@ -35,10 +35,19 @@ def imageInput(device, src):
             model.cuda() if device == 'cuda' else model.cpu()
             pred = model(imgpath)
             pred.render()  # render bbox in image
-            if len(pred.xyxy) > 0:
-                num_objects1 = len(pred.xyxy[0])  # Count of first type of result
-                counter1 += num_objects1
-            counter2 += len(pred.xyxy) - 1 if len(pred.xyxy) > 1 else 0
+            counter_Helm = 0
+            counter_NoHelm = 0
+
+            # Count detections for each type of object
+            for obj in pred.names[0]:
+                if obj == 'helmet':
+                    counter_Helm += 1
+                elif obj == 'head':
+                    counter_NoHelm += 1
+
+            # Increment global counters with the counts from this image
+            counter1 += counter_Helm
+            counter2 += counter_NoHelm
             for im in pred.ims:
                 im_base64 = Image.fromarray(im)
                 im_base64.save(outputpath)
